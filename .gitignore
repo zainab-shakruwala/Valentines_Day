@@ -1,0 +1,8 @@
+valentine-snowman-app.tar
+.DS_STORE
+__pycache__/
+.dockerignore
+/static
+/templates
+DOCKERFILE
+app.py

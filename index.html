@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❄️ Snowman's Valentine Quest ❄️</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="snow-container" id="snowContainer"></div>
+    
+    <div class="game-container">
+        <div class="screen">
+            <div class="header">
+                <h1 class="title">SNOWMAN'S VALENTINE QUEST</h1>
+                <div class="hearts">❤️ ❤️ ❤️</div>
+            </div>
+
+            <div class="game-area" id="gameArea">
+                <div class="snowman" id="snowman">
+                    <div class="snowman-head">
+                        <div class="eyes">
+                            <span class="eye">•</span>
+                            <span class="eye">•</span>
+                        </div>
+                        <div class="carrot-nose"></div>
+                        <div class="mouth happy" id="mouth">⌣</div>
+                    </div>
+                    <div class="snowman-body">
+                        <div class="button">•</div>
+                        <div class="button">•</div>
+                        <div class="button">•</div>
+                    </div>
+                    <div class="snowman-base"></div>
+                    <div class="stick-arms">
+                        <div class="arm left">╱</div>
+                        <div class="arm right">╲</div>
+                    </div>
+                </div>
+
+                <div class="dialog-box" id="dialogBox">
+                    <p class="question">Will you be my Valentine? ❤️</p>
+                    <div class="button-container">
+                        <button class="game-button yes-button" onclick="sayYes()">YES! 💕</button>
+                        <button class="game-button no-button" onclick="sayNo()">NO 💔</button>
+                    </div>
+                </div>
+
+                <div class="response-box hidden" id="responseBox">
+                    <p id="responseText"></p>
+                    <button class="game-button retry-button hidden" id="retryButton" onclick="resetGame()">TRY AGAIN?</button>
+                    <button class="game-button play-again-button hidden" id="playAgainButton" onclick="resetGame()">PLAY AGAIN? ▶️</button>
+                </div>
+            </div>
+
+            <!-- <div class="footer">
+                <p class="pixel-text">PRESS START ▶️ TO PLAY AGAIN</p>
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        // Snow animation
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            
+            document.getElementById('snowContainer').appendChild(snowflake);
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 200);
+
+        // Sad messages array (replaces Flask API)
+        const sadMessages = [
+            "☃️💔 *sniff sniff*",
+            "But... but... I built you a snow fort...",
+            "I guess I'll just melt away then... 😢",
+            "My carrot nose is drooping...",
+            "Even snowmen have feelings... ❄️💧"
+        ];
+
+        // Game logic
+        function sayYes() {
+            const snowman = document.getElementById('snowman');
+            const dialogBox = document.getElementById('dialogBox');
+            const responseBox = document.getElementById('responseBox');
+            const responseText = document.getElementById('responseText');
+            const playAgainButton = document.getElementById('playAgainButton');
+            const mouth = document.getElementById('mouth');
+            
+            snowman.classList.add('happy-dance');
+            mouth.className = 'mouth super-happy';
+            mouth.textContent = '⌣';
+            
+            dialogBox.classList.add('hidden');
+            responseBox.classList.remove('hidden');
+            playAgainButton.classList.remove('hidden');
+            responseText.innerHTML = '🎉 YAY! You made this snowman\'s day! ☃️❤️<br><br>★ LEVEL COMPLETE ★<br>+1000 LOVE POINTS';
+            
+            // Confetti effect
+            createConfetti();
+            playSuccessSound();
+        }
+
+        function sayNo() {
+            const snowman = document.getElementById('snowman');
+            const dialogBox = document.getElementById('dialogBox');
+            const responseBox = document.getElementById('responseBox');
+            const responseText = document.getElementById('responseText');
+            const retryButton = document.getElementById('retryButton');
+            const mouth = document.getElementById('mouth');
+            
+            snowman.classList.add('crying');
+            mouth.className = 'mouth sad';
+            mouth.textContent = '⌣';
+            
+            dialogBox.classList.add('hidden');
+            responseBox.classList.remove('hidden');
+            retryButton.classList.remove('hidden');
+            
+            // Get random sad message
+            const randomMessage = sadMessages[Math.floor(Math.random() * sadMessages.length)];
+            responseText.innerHTML = randomMessage + '<br><br>💧💧💧<br>GAME OVER';
+            
+            // Add tears
+            createTears();
+            playFailSound();
+        }
+
+        function resetGame() {
+            const snowman = document.getElementById('snowman');
+            const dialogBox = document.getElementById('dialogBox');
+            const responseBox = document.getElementById('responseBox');
+            const retryButton = document.getElementById('retryButton');
+            const playAgainButton = document.getElementById('playAgainButton');
+            const mouth = document.getElementById('mouth');
+            
+            snowman.className = 'snowman';
+            mouth.className = 'mouth happy';
+            mouth.textContent = '⌣';
+            
+            dialogBox.classList.remove('hidden');
+            responseBox.classList.add('hidden');
+            retryButton.classList.add('hidden');
+            playAgainButton.classList.add('hidden');
+            
+            // Remove any tears
+            document.querySelectorAll('.tear').forEach(tear => tear.remove());
+        }
+
+        function createTears() {
+            const snowman = document.getElementById('snowman');
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const tear = document.createElement('div');
+                    tear.className = 'tear';
+                    tear.textContent = '💧';
+                    tear.style.left = (Math.random() * 60 + 20) + '%';
+                    snowman.appendChild(tear);
+                }, i * 300);
+            }
+        }
+
+        function createConfetti() {
+            const confettiSymbols = ['❤️', '💕', '💖', '💝', '⭐', '✨'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.textContent = confettiSymbols[Math.floor(Math.random() * confettiSymbols.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.querySelector('.game-area').appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 2000);
+                }, i * 50);
+            }
+        }
+
+        function playSuccessSound() {
+            // Placeholder for 8-bit success sound
+            console.log('♪♪ SUCCESS SOUND ♪♪');
+        }
+
+        function playFailSound() {
+            // Placeholder for 8-bit fail sound
+            console.log('♪♪ FAIL SOUND ♪♪');
+        }
+    </script>
+</body>
+</html>

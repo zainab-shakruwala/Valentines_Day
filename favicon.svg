@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle for better visibility -->
+  <circle cx="50" cy="50" r="48" fill="#4a9eff"/>
+  
+  <!-- Snowman base (bottom) -->
+  <circle cx="50" cy="75" r="20" fill="white" stroke="#333" stroke-width="2"/>
+  
+  <!-- Snowman body (middle) -->
+  <circle cx="50" cy="50" r="15" fill="white" stroke="#333" stroke-width="2"/>
+  
+  <!-- Snowman head (top) -->
+  <circle cx="50" cy="28" r="12" fill="white" stroke="#333" stroke-width="2"/>
+  
+  <!-- Eyes -->
+  <circle cx="45" cy="26" r="2" fill="#333"/>
+  <circle cx="55" cy="26" r="2" fill="#333"/>
+  
+  <!-- Carrot nose -->
+  <polygon points="50,30 50,32 56,31" fill="#ff6b35"/>
+  
+  <!-- Smile -->
+  <path d="M 45 33 Q 50 35 55 33" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Buttons on body -->
+  <circle cx="50" cy="45" r="1.5" fill="#333"/>
+  <circle cx="50" cy="50" r="1.5" fill="#333"/>
+  <circle cx="50" cy="55" r="1.5" fill="#333"/>
+  
+  <!-- Stick arms -->
+  <line x1="35" y1="48" x2="42" y2="50" stroke="#8b4513" stroke-width="2" stroke-linecap="round"/>
+  <line x1="65" y1="48" x2="58" y2="50" stroke="#8b4513" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Small branches on arms -->
+  <line x1="37" y1="47" x2="35" y2="45" stroke="#8b4513" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="63" y1="47" x2="65" y2="45" stroke="#8b4513" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Top hat (optional, makes it fancy!) -->
+  <rect x="43" y="15" width="14" height="3" fill="#333"/>
+  <rect x="45" y="10" width="10" height="6" fill="#333"/>
+  
+  <!-- Snowflakes around -->
+  <text x="15" y="20" font-size="8" fill="white">❄</text>
+  <text x="80" y="30" font-size="6" fill="white">❄</text>
+  <text x="20" y="85" font-size="7" fill="white">❄</text>
+  <text x="75" y="75" font-size="6" fill="white">❄</text>
+</svg>
