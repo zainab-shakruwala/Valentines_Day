@@ -10,13 +10,6 @@ A retro pixel-art Valentine's Day web app featuring a snowman character!
 - 💕 Celebration animation if you say "yes"
 - 🎨 Retro gaming UI with classic arcade vibes
 
-## Setup Instructions
-
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
 ## How to Play
 
 1. The snowman will ask you to be their Valentine
